@@ -10,7 +10,7 @@ I have never released this pack
 ## Data Flow diagram
 ```mermaid
 flowchart TD
-subgraph so[Security Onion (manager)]
+subgraph so[Security Onion manager]
   sensor[Log stream from sensors]
   elastic[Elasticsearch data]
 end
