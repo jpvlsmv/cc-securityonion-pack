@@ -1,7 +1,1 @@
-{
-  "name":"cc-securityonion-pack",
-  "version":"!!GITVER!!",
-  "author":"Joe Moore (jpvlsmv) - cc",
-  "description":"Processing pack for Security Onion - !!GITDESCRIBE!!",
-  "displayName":"cc-securityonion-pack"
-}
+{"name":"cc-securityonion-pack","version":"!!GITVER!!","author":"Joe Moore (jpvlsmv) - cc","description":"Processing pack for Security Onion - !!GITDESCRIBE!!","displayName":"cc-securityonion-pack"}
