@@ -15,10 +15,10 @@ jobs:
     steps:
       - run: echo "Checking health (non-authenticated)"
       - run: |
-          curl "${{ inputs.api-base-url}}v1/health" -H "accept: application/json"
+          curl -sS "${{ inputs.api-base-url}}v1/health" -H "accept: application/json"
       - run: echo "Checking system info (authenticated)"
       - run: |
-          curl "${{ inputs.api-base-url}}v1/system/info" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}"
+          curl -sS "${{ inputs.api-base-url}}v1/system/info" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}"
   fetch-pack:
     runs-on: ubuntu-latest
     steps:
@@ -28,10 +28,10 @@ jobs:
       - name: Get pack and extract
         run: |
           MYNAME=$(echo ${{ github.repository }} | sed s:${{github.repository_owner}}/:: )
-          PACKS=$(curl "${{ inputs.api-base-url}}v1/m/default/packs" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}")
+          PACKS=$(curl -sS "${{ inputs.api-base-url}}v1/m/default/packs" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}")
           echo $PACKS| jq .items[].id | grep -q "^${MYNAME}$" && echo "A pack matching ${MYNAME} was found"
           echo "Extracting pack modifications"
-          curl "${{ inputs.api-base-url}}v1/m/default/packs/${MYNAME}/export?mode=merge&dest=${MYNAME}" \
+          curl -sS "${{ inputs.api-base-url}}v1/m/default/packs/${MYNAME}/export?mode=merge&dest=${MYNAME}" \
             -H "Authorization: Bearer ${{ inputs.bearer-token }}" | tar xvfz -
       - name: Commit and send changes to repository
         uses: EndBug/add-and-commit@v9.1.1
