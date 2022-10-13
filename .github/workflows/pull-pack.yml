@@ -27,8 +27,9 @@ jobs:
 
       - run: |
           MYNAME=$(echo ${{ github.repository }} | sed s:${{github.repository_owner}}/:: )
-          PACKS=$(curl -sS "${{ inputs.api-base-url}}v1/m/default/packs" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}")
-          echo "${PACKS}"| jq -r .items[].id | grep -q "^${MYNAME}$" && echo "A pack matching ${MYNAME} was found"
+          curl -sS "${{ inputs.api-base-url}}v1/m/default/packs" -H "accept: application/json" \
+              -H "Authorization: Bearer ${{ inputs.bearer-token }}" \
+              | jq -r .items[].id | grep -q "^${MYNAME}$" && echo "A pack matching ${MYNAME} was found"
       - run: |
           echo "Extracting pack modifications"
           curl -sS "${{ inputs.api-base-url}}v1/m/default/packs/${MYNAME}/export?mode=merge&dest=${MYNAME}" \
