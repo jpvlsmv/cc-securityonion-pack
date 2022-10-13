@@ -5,10 +5,16 @@ on:
       api-base-url:
         description: Cribl API base url
         required: true
+      bearer-token:
+        description: Token for API authentication
+        required: true
 jobs:
   fetch-pack:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Checking health"
+      - run: echo "Checking health (non-authenticated)"
       - run: |
-          curl -X GET "https://${{ inputs.api-base-url}}v1/health" -H "accept: application/json"
+          curl -X GET "${{ inputs.api-base-url}}v1/health" -H "accept: application/json"
+      - run: echo "Checking system info (authenticated)"
+      - run: |
+          curl -X GET "${{ inputs.api-base-url}}v1/system/info" -H "accept: application/json" -H "Authorization: Bearer ${{ inputs.bearer-token }}"
