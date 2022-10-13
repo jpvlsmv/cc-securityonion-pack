@@ -39,5 +39,5 @@ jobs:
           author_name: Import automation
           default_author: github_actor
           message: "Workflow import by ${{ github.job }} init by ${{github.triggering_actor}}"
-          new_branch: "import-${{ github.workflow }}.${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}"
+          new_branch: "pull-pack-${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}"
           push: true
