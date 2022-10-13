@@ -1,0 +1,14 @@
+name: Pull pack from Stream instance
+on: 
+  workflow_dispatch:
+    inputs:
+      api-base-url:
+        description: Cribl API base url
+        required: true
+jobs:
+  fetch-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Checking health"
+      - run: |
+          curl -X GET "https://${{ inputs.api-base-url}}v1/health" -H "accept: application/json"
