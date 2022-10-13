@@ -27,7 +27,7 @@ jobs:
 
       - run: |
           echo "Extracting pack modifications for ${GITHUB_REPOSITORY#GITHUB_REPOSITORY_OWNER/}"
-          curl -v "${{ inputs.api-base-url}}v1/m/default/packs/${GITHUB_REPOSITORY#GITHUB_REPOSITORY_OWNER/}/export?mode=merge&dest=${GITHUB_REPOSITORY#GITHUB_REPOSITORY_OWNER/}" \
+          curl -v "${{ inputs.api-base-url}}v1/m/default/packs/${GITHUB_REPOSITORY%GITHUB_REPOSITORY_OWNER/}/export?mode=merge&dest=${GITHUB_REPOSITORY%GITHUB_REPOSITORY_OWNER/}" \
             -H "Authorization: Bearer ${{ inputs.bearer-token }}" | tar xvfz -
 
       - name: Commit and send changes to repository
